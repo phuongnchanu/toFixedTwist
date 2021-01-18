@@ -24,5 +24,5 @@
     'It should round -0.615 to -0.61.': function() {
       eq(accounting.toFixedTwist(-0.615, 2), '-0.61');
     }
-  })
-})()
+  });
+})();

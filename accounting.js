@@ -222,11 +222,13 @@
   };
 
   var toFixedTwist = lib.toFixedTwist = function(value, precision) {
+    precision = checkPrecision(precision, lib.settings.number.precision);
+
     if (Number.isInteger(value)) {
       return value.toFixed(precision);
     }
 
-    precision = checkPrecision(precision, lib.settings.number.precision);
+    value = lib.unformat(value);
     var decimalSymbol = lib.settings.number.decimal;
     var valueParts = value.toString().split(decimalSymbol);
     var wholeNumberPart = valueParts[0];
@@ -241,7 +243,7 @@
     var result = rounded / Math.pow(10, precision);
 
     return result.toFixed(precision);
-  }
+  };
 
   /**
    * Format a number, with comma-separated thousands and custom precision/decimal places
@@ -427,7 +429,7 @@
     })(root.accounting);
 
     // Declare `fx` on the root (global/window) object:
-    root['accounting'] = lib;
+    root.accounting = lib;
   }
 
   // Root will be `window` in browser or `global` on the server:
